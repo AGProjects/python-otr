@@ -1,0 +1,6 @@
+include ChangeLog
+include LICENSE
+include README
+include MANIFEST.in
+
+include test.py

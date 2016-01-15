@@ -1,0 +1,33 @@
+Source: python-otr
+Section: python
+Priority: optional
+Maintainer: Dan Pascu <dan@ag-projects.com>
+Uploaders: Saul Ibarra <saul@ag-projects.com>
+Build-Depends: debhelper (>= 7.1.5), dh-python, python
+Standards-Version: 3.9.6
+Homepage: https://pypi.python.org/pypi/python-otr
+
+Package: python-otr
+Architecture: all
+Depends: ${python:Depends}, ${misc:Depends}, python-application (>= 2.0.0), python-cryptography (>= 1.0.0), python-enum34, python-gmpy2, python-zope.interface
+Description: Off-The-Record Messaging (OTR) protocol implementation for python
+ This package implements the Off-The-Record Messaging protocol in pure python.
+ .
+ Off-The-Record Messaging (OTR) is a cryptographic protocol that provides
+ encryption for instant messaging conversations. OTR uses a combination of
+ AES symmetric-key algorithm with 128 bits key length, the Diffie–Hellman
+ key exchange with 1536 bits group size, and the SHA-1/SHA-256 hash functions.
+ .
+ The OTR protocol provides:
+ .
+ 1. End-to-end encryption: No one else can read your messages.
+ 2. Authentication: The correspondent's identity can be verified.
+ 3. Deniability: The messages you send do not have digital signatures that can
+    be checked by a third party. Anyone can forge messages after a conversation
+    to make them look like they came from you, however during the conversation
+    your correspondent is assured that the messages he sees coming from you are
+    authentic and unmodified.
+ 4. Perfect forward secrecy: If you lose control of your private keys, you are
+    assured that no previous conversation is compromised.
+ .
+ This package implements the version 2 and 3 of the OTR protocol.

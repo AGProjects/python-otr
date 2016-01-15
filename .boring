@@ -1,0 +1,18 @@
+#
+# Boring file regular expressions
+#
+
+~$
+\#
+(^|/)\.DS_Store$
+(^|/)Thumbs\.db$
+(^|/)core(\.[0-9]+)?$
+\.(pyc|pyo|o|so|orig|rej|prof|bak|BAK|tmp|wpr|wpu|komodoproject)$
+
+(^|/)\.idea($|/)
+(^|/)\.komodotools($|/)
+(^|/)_darcs($|/)
+
+^MANIFEST$
+^build($|/)
+^dist($|/)
