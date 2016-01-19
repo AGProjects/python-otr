@@ -1074,6 +1074,9 @@ class OTRProtocol(object):
         if self.state is OTRState.Encrypted:
             self._smp_terminate(status=SMPStatus.Interrupted, reason='encryption ended', send_abort=self.smp.in_progress)
             self.send_tlv(DisconnectTLV())
+            self.remote_public_key = None
+            self.session_id = None
+            self.extra_key = None
             self.smp = Null
             self.state = OTRState.Plaintext
         elif self.state is OTRState.Finished:
@@ -1286,6 +1289,9 @@ class OTRProtocol(object):
 
     def _TH_DisconnectTLV(self, tlv):
         self._smp_terminate(status=SMPStatus.Interrupted, reason='encryption ended', send_abort=False)
+        self.remote_public_key = None
+        self.session_id = None
+        self.extra_key = None
         self.smp = Null
         self.state = OTRState.Finished
 
