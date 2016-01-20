@@ -60,6 +60,13 @@ class OTRSession(object):
             notification_center.add_observer(self, sender=new_protocol)
 
     @property
+    def id(self):
+        try:
+            return self.protocol.session_id
+        except AttributeError:
+            return None
+
+    @property
     def state(self):
         try:
             return self.protocol.state
