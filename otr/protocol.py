@@ -1061,7 +1061,7 @@ class OTRProtocol(object):
             notification_center.post_notification('OTRProtocolStateChanged', sender=self, data=NotificationData(old_state=old_state, new_state=new_state))
 
     def start(self):
-        if self.ake is Null:
+        if self.state is OTRState.Plaintext and self.ake is Null:
             self.dh_local_private_keys.clear()
             self.dh_remote_public_keys.clear()
             self.session_keys.old_macs = []

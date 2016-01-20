@@ -76,8 +76,8 @@ class OTRSession(object):
             query = QueryMessage(versions=OTRProtocol.supported_versions)
             self.send_message(query.encode())
             self.sent_query = True
-        elif self.encrypted:
-            pass  # todo: restart ake? only if encrypted?
+        else:
+            pass  # never restart the AKE as it creates a security risk which allows man-in-the-middle attacks even after the session was encrypted and verified using SMP
 
     def stop(self):
         if self.protocol is not None:
@@ -119,16 +119,13 @@ class OTRSession(object):
             except ValueError:
                 pass
             else:
-                if self.protocol is None or self.state is OTRState.Finished:
+                if self.protocol is None:
                     common_versions = OTRProtocol.supported_versions.intersection(query.versions)
                     if common_versions:
-                        # state = self.state
                         self.protocol = OTRProtocol.with_version(max(common_versions))(self)
-                        # if state is OTRState.Finished:
-                        #     self.protocol.__dict__['state'] = OTRState.Finished  # restore the Finished state in order to transition from Finished -> Encrypted
                         self.protocol.start()
                 else:
-                    pass  # todo: restart ake
+                    pass  # never restart the AKE as it creates a security risk which allows man-in-the-middle attacks even after the session was encrypted and verified using SMP
                 raise IgnoreMessage
             try:
                 error = ErrorMessage.decode(content)
