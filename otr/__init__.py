@@ -61,11 +61,17 @@ class OTRSession(object):
 
     @property
     def state(self):
-        return self.protocol.state if self.protocol is not None else OTRState.Plaintext
+        try:
+            return self.protocol.state
+        except AttributeError:
+            return OTRState.Plaintext
 
     @property
     def remote_public_key(self):
-        return None if self.protocol is None else self.protocol.remote_public_key
+        try:
+            return self.protocol.remote_public_key
+        except AttributeError:
+            return None
 
     @property
     def encrypted(self):
