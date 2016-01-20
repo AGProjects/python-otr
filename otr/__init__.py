@@ -32,13 +32,16 @@ class GenericOTRTransport(OTRTransport):
 class OTRSession(object):
     implements(IObserver)
 
-    def __init__(self, private_key, transport):
+    def __init__(self, private_key, transport, supported_versions=OTRProtocol.supported_versions):
         if not isinstance(private_key, PrivateKey):
             raise TypeError("private_key must be a PrivateKey instance")
         if not isinstance(transport, OTRTransport):
             raise TypeError("transport must be an OTRTransport instance")
+        if not OTRProtocol.supported_versions.issuperset(supported_versions):
+            raise ValueError("unsupported protocol version: {!r}".format(set(supported_versions).difference(OTRProtocol.supported_versions).pop()))
         self.local_private_key = private_key
         self.transport = transport
+        self.supported_versions = set(supported_versions)
         self.fragment_handler = MessageFragmentHandler()
         self.protocol = None
         self.sent_query = False
@@ -86,7 +89,7 @@ class OTRSession(object):
 
     def start(self):
         if not self.sent_query and self.protocol is None:
-            query = QueryMessage(versions=OTRProtocol.supported_versions)
+            query = QueryMessage(versions=self.supported_versions)
             self.send_message(query.encode())
             self.sent_query = True
         else:
@@ -133,7 +136,7 @@ class OTRSession(object):
                 pass
             else:
                 if self.protocol is None:
-                    common_versions = OTRProtocol.supported_versions.intersection(query.versions)
+                    common_versions = self.supported_versions.intersection(query.versions)
                     if common_versions:
                         self.protocol = OTRProtocol.with_version(max(common_versions))(self)
                         self.protocol.start()
@@ -154,7 +157,7 @@ class OTRSession(object):
         else:
             if self.protocol is None and content_type.startswith('text/') and TaggedPlaintextMessage.__tag__.prefix in content:
                 query = TaggedPlaintextMessage.decode(content)
-                common_versions = OTRProtocol.supported_versions.intersection(query.versions)
+                common_versions = self.supported_versions.intersection(query.versions)
                 if common_versions:
                     self.protocol = OTRProtocol.with_version(max(common_versions))(self)
                     self.protocol.start()
