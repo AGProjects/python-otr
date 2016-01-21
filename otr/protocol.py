@@ -1190,7 +1190,7 @@ class OTRProtocol(object):
         if self.ake.state is AKEState.AwaitingDHKey and self.ake.hashed_gx > message.hashed_gx:
             # this here basically re-sends the last message
             self.send_message(DHCommitMessage.new(self))
-        else:
+        elif self.state is OTRState.Plaintext:
             if self.ake is Null:
                 self.dh_local_private_keys.clear()
                 self.dh_remote_public_keys.clear()
