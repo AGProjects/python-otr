@@ -126,7 +126,9 @@ class OTRSession(object):
         # handle OTR messages
         if content.startswith('?OTR:'):
             if self.protocol is None and self.sent_query and content[OTRProtocol.marker_slice] in OTRProtocol.commit_markers:
-                self.protocol = OTRProtocol.with_marker(content[OTRProtocol.marker_slice])(self)
+                protocol_class = OTRProtocol.with_marker(content[OTRProtocol.marker_slice])
+                if protocol_class.__version__ in self.supported_versions:
+                    self.protocol = protocol_class(self)
             if self.protocol is not None:
                 return self.protocol.handle_input(content, content_type)
         elif content.startswith('?OTR'):
