@@ -1,3 +1,9 @@
+python-otr (1.1.1) UNRELEASED; urgency=medium
+
+  * Only accept the DH commit message if it has a version we support
+
+ -- Dan Pascu <dan@ag-projects.com>  Mon, 25 Jan 2016 20:07:17 +0200
+
 python-otr (1.1.0) unstable; urgency=medium
 
   * Reset OTRProtocol public attributes when encryption ends

@@ -5,7 +5,7 @@ __project__ = "python-otr"
 __summary__ = "Off-The-Record Messaging (OTR) protocol implementation for python"
 __webpage__ = "https://github.com/AGProjects/python-otr"
 
-__version__ = "1.1.0"
+__version__ = "1.1.1"
 
 __author__ = "AG Projects"
 __email__ = "support@ag-projects.com"

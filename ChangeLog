@@ -1,3 +1,8 @@
+Changes in version 1.1.1
+------------------------
+
+* Only accept the DH commit message if it has a version we support
+
 Changes in version 1.1.0
 ------------------------
 
