@@ -1,3 +1,13 @@
+Changes in version 1.1.0
+------------------------
+
+  * Reset OTRProtocol public attributes when encryption ends
+  * Don't allow restarting the protocol to prevent man-in-the-middle attacks
+  * Made OTRSession properties thread-safe
+  * Added OTRSession.id property
+  * Allow specifying the supported protocol versions with OTRSession
+  * Do not allow unsolicited DHCommit messages to restart the AKE
+
 Changes in version 1.0.0
 ------------------------
 

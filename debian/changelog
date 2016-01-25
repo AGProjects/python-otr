@@ -1,3 +1,14 @@
+python-otr (1.1.0) unstable; urgency=medium
+
+  * Reset OTRProtocol public attributes when encryption ends
+  * Don't allow restarting the protocol to prevent man-in-the-middle attacks
+  * Made OTRSession properties thread-safe
+  * Added OTRSession.id property
+  * Allow specifying the supported protocol versions with OTRSession
+  * Do not allow unsolicited DHCommit messages to restart the AKE
+
+ -- Dan Pascu <dan@ag-projects.com>  Mon, 25 Jan 2016 10:46:52 +0200
+
 python-otr (1.0.0) unstable; urgency=medium
 
   * Initial release
