@@ -1,3 +1,8 @@
+Changes in version 1.1.2
+------------------------
+
+* Fixed bug that allowed messages to be sent in the Finished state
+
 Changes in version 1.1.1
 ------------------------
 

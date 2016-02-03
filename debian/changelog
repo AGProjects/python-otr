@@ -1,3 +1,9 @@
+python-otr (1.1.2) unstable; urgency=medium
+
+  * Fixed bug that allowed messages to be sent in the Finished state
+
+ -- Dan Pascu <dan@ag-projects.com>  Wed, 03 Feb 2016 11:54:19 +0200
+
 python-otr (1.1.1) unstable; urgency=medium
 
   * Only accept the DH commit message if it has a version we support
