@@ -167,7 +167,7 @@ class OTRSession(object):
             return content
 
     def handle_output(self, content, content_type):
-        if self.encrypted:
+        if self.state in (OTRState.Encrypted, OTRState.Finished):
             return self.protocol.handle_output(content, content_type)
         else:
             return content
