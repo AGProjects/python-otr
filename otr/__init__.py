@@ -88,7 +88,7 @@ class OTRSession(object):
         return self.state is OTRState.Encrypted
 
     def start(self):
-        if not self.sent_query and self.protocol is None:
+        if self.protocol is None:
             query = QueryMessage(versions=self.supported_versions)
             self.send_message(query.encode())
             self.sent_query = True
