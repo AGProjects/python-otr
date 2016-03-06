@@ -915,6 +915,7 @@ class SocialistMillionairesProtocol(object):
         self.secret = None
 
         self.state = SMPState.ExpectMessage1
+        self.ignore_next_abort = False
 
     @property
     def in_progress(self):
@@ -985,6 +986,7 @@ def smp_message_handler(expected_state):
             """@type self: OTRProtocol"""
             try:
                 if self.smp.state is SMPState.ExpectMessage2 and expected_state is SMPState.ExpectMessage1:
+                    self.smp.ignore_next_abort = True  # if a collision happens both parties will send an abort, which could cancel the next SMP exchange if it starts too soon
                     raise ValueError('startup collision')
                 elif self.smp.state is not expected_state:
                     raise ValueError('received {0.__class__.__name__} out of order'.format(tlv))
@@ -1349,7 +1351,10 @@ class OTRProtocol(object):
         self._smp_terminate(status=SMPStatus.Success, same_secrets=self.smp.rab == self.smp.pab)
 
     def _TH_SMPAbortMessage(self, tlv):
-        self._smp_terminate(status=SMPStatus.Interrupted, reason='aborted from remote', send_abort=False)
+        if self.smp.ignore_next_abort:
+            self.smp.ignore_next_abort = False
+        else:
+            self._smp_terminate(status=SMPStatus.Interrupted, reason='aborted from remote', send_abort=False)
 
 
 class OTRProtocolVersion2(OTRProtocol):
