@@ -1110,7 +1110,7 @@ class OTRProtocol(object):
         self._smp_terminate(status=SMPStatus.Interrupted, reason='cancelled', send_abort=self.smp.in_progress)
 
     def _smp_terminate(self, status, reason=None, same_secrets=None, send_abort=False):
-        assert status is SMPStatus.Success or same_secrets is not True  # do not use 'is False' because it can also be None
+        assert status is SMPStatus.Success or same_secrets is None
         if send_abort and self.state is OTRState.Encrypted:
             self.send_tlv(SMPAbortMessage())
         if self.smp.in_progress:
