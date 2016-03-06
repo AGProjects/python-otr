@@ -984,7 +984,9 @@ def smp_message_handler(expected_state):
         def function_wrapper(self, tlv):
             """@type self: OTRProtocol"""
             try:
-                if self.smp.state is not expected_state:
+                if self.smp.state is SMPState.ExpectMessage2 and expected_state is SMPState.ExpectMessage1:
+                    raise ValueError('startup collision')
+                elif self.smp.state is not expected_state:
                     raise ValueError('received {0.__class__.__name__} out of order'.format(tlv))
                 function(self, tlv)
             except ValueError, e:
