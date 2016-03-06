@@ -1089,17 +1089,16 @@ class OTRProtocol(object):
             self._stop_requested = True
 
     def smp_verify(self, secret, question=None):
+        notification_center = NotificationCenter()
         if self.state is not OTRState.Encrypted:
-            notification_center = NotificationCenter()
             notification_center.post_notification('OTRProtocolSMPVerificationDidNotStart', sender=self, data=NotificationData(reason='not encrypted'))
+        elif self.smp.in_progress:
+            notification_center.post_notification('OTRProtocolSMPVerificationDidNotStart', sender=self, data=NotificationData(reason='in progress'))
         else:
-            if self.smp.in_progress:
-                return  # the OTR specification says we can abort the one in progress and start a new one or continue with the existing one
             self.smp.question = question
             self.smp.secret = bytes_to_long(sha256('\1' + self.local_private_key.public_key.fingerprint + self.remote_public_key.fingerprint + self.session_id + secret).digest())
             self.send_tlv(SMPMessage1.new(self) if question is None else SMPMessage1Q.new(self, question))
             self.smp.state = SMPState.ExpectMessage2
-            notification_center = NotificationCenter()
             notification_center.post_notification('OTRProtocolSMPVerificationDidStart', sender=self, data=NotificationData(originator='local', question=question))
 
     def smp_answer(self, secret):
