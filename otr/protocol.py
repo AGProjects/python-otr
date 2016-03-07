@@ -886,6 +886,8 @@ class AuthenticatedKeyExchange(object):
 
 
 class SocialistMillionairesProtocol(object):
+    ignore_next_abort = False  # use a class level attribute to avoid it being cleared during reset()
+
     def __init__(self):
         self.g1 = DHGroup.generator
         self.g2 = None
@@ -915,7 +917,6 @@ class SocialistMillionairesProtocol(object):
         self.secret = None
 
         self.state = SMPState.ExpectMessage1
-        self.ignore_next_abort = False
 
     @property
     def in_progress(self):
