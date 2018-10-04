@@ -9,7 +9,7 @@ Homepage: https://pypi.python.org/pypi/python-otr
 
 Package: python-otr
 Architecture: all
-Depends: ${python:Depends}, ${misc:Depends}, python-application (>= 2.0.0), python-cryptography (>= 1.0.0), python-enum34, python-gmpy2, python-zope.interface
+Depends: ${python:Depends}, ${misc:Depends}, python-application (>= 2.0.0), python-cryptography (>= 1.6), python-enum34, python-gmpy2, python-zope.interface
 Description: Off-The-Record Messaging (OTR) protocol implementation for python
  This package implements the Off-The-Record Messaging protocol in pure python.
  .
