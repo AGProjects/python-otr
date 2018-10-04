@@ -1,3 +1,8 @@
+Changes in version 1.2.1
+------------------------
+
+  * Updated signing/verifying to use the new python-cryptography API
+
 Changes in version 1.2.0
 ------------------------
 

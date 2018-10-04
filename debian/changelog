@@ -1,3 +1,13 @@
+python-otr (1.2.1) unstable; urgency=medium
+
+  * Updated signing/verifying to use the new python-cryptography API
+  * Updated minimum required version for python-cryptography
+  * Increased debian compatibility level to 9
+  * Increased debian standards version to 3.9.8
+  * Removed obsolete pycompat/pyversions files
+
+ -- Dan Pascu <dan@ag-projects.com>  Thu, 04 Oct 2018 20:30:33 +0300
+
 python-otr (1.2.0) unstable; urgency=medium
 
   * Fixed integrity check
