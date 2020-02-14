@@ -230,5 +230,6 @@ class OTRTest(unittest.TestCase):
 
 
 if __name__ == '__main__':
+    log.Formatter.prefix_format = '{record.levelname:<8s} '
     log.level.current = log.level.INFO
     unittest.main(verbosity=2)
