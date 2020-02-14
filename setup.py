@@ -19,7 +19,7 @@ class PackageInfo(object):
 package_info = PackageInfo(os.path.join('otr', '__info__.py'))
 
 requirements = [
-    'python_application (>=2.0.0)',
+    'python_application (>=2.8.0)',
     'cryptography (>=1.6)',
     'enum34',
     'gmpy2',
