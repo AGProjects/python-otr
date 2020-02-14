@@ -1,3 +1,11 @@
+Changes in version 1.2.2
+------------------------
+
+  * Explicitly use python2 in shebang lines
+  * Set the logging prefix for the test script
+  * Updated license and copyright years
+  * Updated minimum version for python-application dependency
+
 Changes in version 1.2.1
 ------------------------
 

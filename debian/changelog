@@ -1,3 +1,17 @@
+python-otr (1.2.2) unstable; urgency=medium
+
+  * Explicitly use python2 in shebang lines
+  * Set the logging prefix for the test script
+  * Updated license and copyright years
+  * Updated minimum version for python-application dependency
+  * Split debian dependencies one per line
+  * Use pybuild as debian build system
+  * Updated debian uploaders
+  * Increased debian compatibility level to 11
+  * Increased debian standards version to 4.5.0
+
+ -- Dan Pascu <dan@ag-projects.com>  Fri, 14 Feb 2020 11:58:38 +0200
+
 python-otr (1.2.1) unstable; urgency=medium
 
   * Updated signing/verifying to use the new python-cryptography API
